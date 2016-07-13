@@ -15,6 +15,7 @@ install_gnustep_make() {
         ADDITIONAL_FLAGS=""
     fi
     ./configure --prefix=$HOME/staging --with-library-combo=$LIBRARY_COMBO $ADDITIONAL_FLAGS
+	make install
 }
 
 install_ng_runtime() {
@@ -27,7 +28,6 @@ install_ng_runtime() {
     cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DGNUSTEP_INSTALL_TYPE=NONE -DCMAKE_INSTALL_PREFIX:PATH=$HOME/staging ../
     make install
 }
-
 
 mkdir -p $DEP_SRC
 if [ $LIBRARY_COMBO = 'ng-gnu-gnu' ]
