@@ -1,4 +1,5 @@
 language: cpp
+dist: trusty
 compiler:
     - clang
     - gcc
@@ -19,7 +20,15 @@ matrix:
           env: LIBRARY_COMBO=ng-gnu-gnu BASE_ABI=--disable-mixed-abi
         - compiler: gcc
           env: LIBRARY_COMBO=ng-gnu-gnu BASE_ABI=--disable-mixed-abi SORT_ALG=timsort
-sudo: false
+sudo: required
+before_install:
+    - sudo apt-get -qq update
+    - sudo apt-get install -y cmake pkg-config libgnutls28-dev libgmp-dev libffi-dev libicu-dev libxml2-dev libxslt1-devlibssl-dev libavahi-client-dev zlib1g-dev
+    - >
+        if [ $LIBRARY_COMBO = 'gnu-gnu-gnu'];
+        then
+          sudo apt-get install -y libobjc-4.8-dev;
+        fi
 install: ./travis-deps.sh
 before_script: >
     export LIBRARY_PATH=$HOME/staging/lib:$LIBRARY_PATH;

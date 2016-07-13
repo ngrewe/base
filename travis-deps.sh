@@ -1,6 +1,6 @@
 #! /usr/bin/env sh
 
-set -eu
+set -eux
 
 DEP_SRC=$HOME/dependency_source/
 
