@@ -20,7 +20,10 @@ matrix:
           env: LIBRARY_COMBO=ng-gnu-gnu BASE_ABI=--disable-mixed-abi
         - compiler: gcc
           env: LIBRARY_COMBO=ng-gnu-gnu BASE_ABI=--disable-mixed-abi SORT_ALG=timsort
-
+        - compiler: clang
+          env: LIBRARY_COMBO=gnu-gnu-gnu
+        - compiler: clang
+          env: LIBRARY_COMBO=gnu-gnu-gnu SORT_ALG=timsort
 sudo: required
 before_install:
     - sudo apt-get -qq update
