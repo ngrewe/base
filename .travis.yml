@@ -45,6 +45,4 @@ script: >
         SORT_ALG=shellsort
     fi;
     ./configure --with-sort-algorithm=$SORT_ALG $BASE_ABI;
-    make;
-    make install;
-    make check;
+    make && make install && make check;

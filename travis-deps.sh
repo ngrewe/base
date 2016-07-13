@@ -1,6 +1,6 @@
 #! /usr/bin/env sh
 
-set -eux
+set -ex
 
 DEP_SRC=$HOME/dependency_source/
 
@@ -36,7 +36,7 @@ install_libdispatch() {
     cd libdispatch/build
     export CC="clang"
     export CXX="clang++"
-    export LIBRARY_PATH=$HOME/staging/lib:$LIBRARY_PATH;
+    export LIBRARY_PATH=$HOME/staging/lib;
     export LD_LIBRARY_PATH=$HOME/staging/lib:$LD_LIBRARY_PATH;
     export CPATH=$HOME/staging/include;
     cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo  -DCMAKE_INSTALL_PREFIX:PATH=$HOME/staging ../
