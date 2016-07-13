@@ -27,7 +27,7 @@ before_install:
     - >
         if [ $LIBRARY_COMBO = 'gnu-gnu-gnu' ];
         then
-          if [ $CC = 'gcc' ];
+          if [ $CC = 'gcc' ];
           then
             sudo apt-get install -y gobjc;
           fi;
@@ -42,6 +42,8 @@ before_script: >
     if [ $LIBRARY_COMBO = 'ng-gnu-gnu' ];
     then
       export CPATH=$HOME/staging/include;
+    else
+      export CPATH=/usr/lib/gcc/x86_64-linux-gnu/4.8/include;
     fi;
     export PATH=$HOME/staging/bin:$PATH;
     export GNUSTEP_MAKEFILES=$HOME/staging/share/GNUstep/Makefiles;
