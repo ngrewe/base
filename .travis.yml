@@ -25,15 +25,15 @@ before_script: >
     export LIBRARY_PATH=$HOME/staging/lib:$LIBRARY_PATH;
     export LD_LIBRARY_PATH=$HOME/staging/lib:$LD_LIBRARY_PATH;
     export CPATH=$HOME/staging/include:$CPATH;
-    . $HOME/staging/share/GNUstep/Makefiles/GNUstep.sh
+    . $HOME/staging/share/GNUstep/Makefiles/GNUstep.sh;
 script: >
-    if [ -n $SORT_ALG ]
+    if [ -n $SORT_ALG ];
     then
         SORT_ALG_PARAM=--with-sort-algorithm=$SORT_ALG
-    fi
-    ./configure $SORT_ALG_PARAM $BASE_API
-    make
-    make check
+    fi;
+    ./configure $SORT_ALG_PARAM $BASE_API;
+    make;
+    make check;
 addons:
     apt:
         packages:
