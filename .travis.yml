@@ -27,15 +27,22 @@ before_install:
     - >
         if [ $LIBRARY_COMBO = 'gnu-gnu-gnu' ];
         then
+          if [ $CC = 'gcc' ];
+          then
+            sudo apt-get install -y gobjc;
+          fi;
           sudo apt-get install -y libobjc-4.8-dev;
         else
           sudo apt-get install -y libkqueue-dev libpthread-workqueue-dev;
-        fi
+        fi;
 install: ./travis-deps.sh
 before_script: >
     export LIBRARY_PATH=$HOME/staging/lib:$LIBRARY_PATH;
     export LD_LIBRARY_PATH=$HOME/staging/lib:$LD_LIBRARY_PATH;
-    export CPATH=$HOME/staging/include;
+    if [ $LIBRARY_COMBO = 'ng-gnu-gnu' ];
+    then
+      export CPATH=$HOME/staging/include;
+    fi;
     export PATH=$HOME/staging/bin:$PATH;
     export GNUSTEP_MAKEFILES=$HOME/staging/share/GNUstep/Makefiles;
     . $HOME/staging/share/GNUstep/Makefiles/GNUstep.sh;
