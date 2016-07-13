@@ -37,7 +37,7 @@ before_script: >
     export LD_LIBRARY_PATH=$HOME/staging/lib:$LD_LIBRARY_PATH;
     export CPATH=$HOME/staging/include;
     export PATH=$HOME/staging/bin:$PATH;
-    export GNUSTEP_MAKEFILES=$HOME/staging/share/GNUstep/Makefiles
+    export GNUSTEP_MAKEFILES=$HOME/staging/share/GNUstep/Makefiles;
     . $HOME/staging/share/GNUstep/Makefiles/GNUstep.sh;
 script: >
     if [ -z "$SORT_ALG" ];
