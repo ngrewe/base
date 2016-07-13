@@ -20,6 +20,7 @@ matrix:
           env: LIBRARY_COMBO=ng-gnu-gnu BASE_ABI=--disable-mixed-abi
         - compiler: gcc
           env: LIBRARY_COMBO=ng-gnu-gnu BASE_ABI=--disable-mixed-abi SORT_ALG=timsort
+
 sudo: required
 before_install:
     - sudo apt-get -qq update
@@ -54,4 +55,4 @@ script: >
         SORT_ALG=shellsort
     fi;
     ./configure --with-sort-algorithm=$SORT_ALG $BASE_ABI;
-    make && make install && make check;
+    make && make install && make check || (cat Tests/tests.log && false);
