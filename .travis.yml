@@ -25,7 +25,7 @@ before_install:
     - sudo apt-get -qq update
     - sudo apt-get install -y cmake pkg-config libgnutls28-dev libgmp-dev libffi-dev libicu-dev libxml2-dev libxslt1-dev libssl-dev libavahi-client-dev zlib1g-dev
     - >
-        if [ $LIBRARY_COMBO = 'gnu-gnu-gnu'];
+        if [ $LIBRARY_COMBO = 'gnu-gnu-gnu' ];
         then
           sudo apt-get install -y libobjc-4.8-dev;
         else
@@ -35,7 +35,9 @@ install: ./travis-deps.sh
 before_script: >
     export LIBRARY_PATH=$HOME/staging/lib:$LIBRARY_PATH;
     export LD_LIBRARY_PATH=$HOME/staging/lib:$LD_LIBRARY_PATH;
-    export CPATH=$HOME/staging/include:$CPATH;
+    export CPATH=$HOME/staging/include;
+    export PATH=$HOME/staging/bin:$PATH;
+    export GNUSTEP_MAKEFILES=$HOME/staging/share/GNUstep/Makefiles
     . $HOME/staging/share/GNUstep/Makefiles/GNUstep.sh;
 script: >
     if [ -z "$SORT_ALG" ];
