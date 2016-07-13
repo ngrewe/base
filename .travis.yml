@@ -23,11 +23,13 @@ matrix:
 sudo: required
 before_install:
     - sudo apt-get -qq update
-    - sudo apt-get install -y cmake pkg-config libgnutls28-dev libgmp-dev libffi-dev libicu-dev libxml2-dev libxslt1-devlibssl-dev libavahi-client-dev zlib1g-dev
+    - sudo apt-get install -y cmake pkg-config libgnutls28-dev libgmp-dev libffi-dev libicu-dev libxml2-dev libxslt1-dev libssl-dev libavahi-client-dev zlib1g-dev
     - >
         if [ $LIBRARY_COMBO = 'gnu-gnu-gnu'];
         then
           sudo apt-get install -y libobjc-4.8-dev;
+        else
+          sudo apt-get install -y libkqueue-dev libpthread-workqueue-dev;
         fi
 install: ./travis-deps.sh
 before_script: >
@@ -36,24 +38,11 @@ before_script: >
     export CPATH=$HOME/staging/include:$CPATH;
     . $HOME/staging/share/GNUstep/Makefiles/GNUstep.sh;
 script: >
-    if [ -n $SORT_ALG ];
+    if [ -z "$SORT_ALG" ];
     then
-        SORT_ALG_PARAM=--with-sort-algorithm=$SORT_ALG
+        SORT_ALG=shellsort
     fi;
-    ./configure $SORT_ALG_PARAM $BASE_API;
+    ./configure --with-sort-algorithm=$SORT_ALG $BASE_ABI;
     make;
+    make install;
     make check;
-addons:
-    apt:
-        packages:
-            - cmake
-            - pkg-config
-            - libgnutls28-dev
-            - libgmp-dev
-            - libffi-dev
-            - libicu-dev
-            - libxml2-dev
-            - libxslt1-dev
-            - libssl-dev
-            - libavahi-client-dev
-            - zlib1g-dev

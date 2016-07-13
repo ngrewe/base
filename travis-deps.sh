@@ -29,10 +29,22 @@ install_ng_runtime() {
     make install
 }
 
+install_libdispatch() {
+    cd $DEP_SRC
+    git clone https://github.com/ngrewe/libdispatch.git
+    mkdir libdispatch/build
+    cd libdispatch/build
+    export CC="clang"
+    export CXX="clang++"
+    cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo  -DCMAKE_INSTALL_PREFIX:PATH=$HOME/staging ../
+    make install
+}
+
 mkdir -p $DEP_SRC
 if [ $LIBRARY_COMBO = 'ng-gnu-gnu' ]
 then
     install_ng_runtime
+    install_libdispatch
 fi
 
 install_gnustep_make
