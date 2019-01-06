@@ -31,7 +31,7 @@ install_ng_runtime() {
 
 install_libdispatch() {
     cd $DEP_SRC
-    git clone https://github.com/ngrewe/libdispatch.git
+    git clone https://github.com/apple/swift-corelibs-libdispatch.git libdispatch
     mkdir libdispatch/build
     cd libdispatch/build
     export CC="clang"
@@ -39,7 +39,7 @@ install_libdispatch() {
     export LIBRARY_PATH=$HOME/staging/lib;
     export LD_LIBRARY_PATH=$HOME/staging/lib:$LD_LIBRARY_PATH;
     export CPATH=$HOME/staging/include;
-    cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo  -DCMAKE_INSTALL_PREFIX:PATH=$HOME/staging ../
+    cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo  -DCMAKE_INSTALL_PREFIX:PATH=$HOME/staging -DBlocksRuntime_INCLUDE_DIR=$HOME/staging/include -DBlocksRuntime_LIBRARIES=$HOME/staging/lib/libobjc.so ../
     make install
 }
 
