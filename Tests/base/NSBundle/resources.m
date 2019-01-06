@@ -40,8 +40,9 @@ int main()
 
 #if	defined(GNUSTEP)
     START_SET("NSBundle GNUstep general")
-      NSBundle *gnustepBundle = nil;
-      NSArray  *arr = nil;
+      NSBundle *gnustepBundle;
+      NSArray  *arr;
+
       gnustepBundle = [NSBundle bundleForLibrary: @"gnustep-base"];
       if (nil == gnustepBundle)
 	SKIP("it looks like GNUstep-base is not yet installed")
